@@ -10,7 +10,9 @@
     "@angular/core": "^16.2.12"
   },
   "dependencies": {
-    "tslib": "^2.6.2"
+    "tslib": "^2.6.2",
+    "@valtimo/components": "11.3.1",
+    "@valtimo/plugin": "11.3.1"
   },
   "devDependencies": {
     "ng-packagr": "^16.2.3"
