@@ -26,7 +26,7 @@ buildscript {
 plugins {
     id "idea"
 
-    id "org.springframework.boot" version "${springVersion}"
+    //id "org.springframework.boot" version "${springVersion}"
     id "io.spring.dependency-management" version "${springDependencyManagementVersion}"
 
     id "org.jetbrains.kotlin.jvm" version "${kotlinVersion}"
@@ -45,13 +45,15 @@ repositories {
 }
 
 dependencies {
-    implementation "com.ritense.valtimo:contract:${valtimoVersion}"
-    implementation "com.ritense.valtimo:core:${valtimoVersion}"
-    implementation "com.ritense.valtimo:plugin-valtimo:${valtimoVersion}"
-    implementation "com.ritense.valtimo:value-resolver:${valtimoVersion}"
-    implementation "com.ritense.valtimo:mail:${valtimoVersion}"
+    compileOnly "org.springframework.boot:spring-boot-starter-security:${springVersion}"
+    compileOnly "org.springframework.boot:spring-boot-starter-data-jpa:${springVersion}"
+    compileOnly "com.ritense.valtimo:contract:${valtimoVersion}"
+    compileOnly "com.ritense.valtimo:core:${valtimoVersion}"
+    compileOnly "com.ritense.valtimo:plugin-valtimo:${valtimoVersion}"
+    compileOnly "com.ritense.valtimo:value-resolver:${valtimoVersion}"
+    compileOnly "com.ritense.valtimo:mail:${valtimoVersion}"
 
-    implementation "org.springframework.boot:spring-boot-starter-webflux:${springVersion}"
+    compileOnly "org.springframework.boot:spring-boot-starter-webflux:${springVersion}"
 
     implementation "io.github.microutils:kotlin-logging:3.0.5"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.14.2"
@@ -107,4 +109,3 @@ targetCompatibility = 17
 
 apply plugin: "com.avast.gradle.docker-compose"
 
-apply from: "gradle/publishing.gradle"
