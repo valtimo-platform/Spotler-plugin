@@ -17,7 +17,7 @@
  *
  */
 
-import {PluginConfigurationData} from '@valtimo/plugin';
+import {FunctionConfigurationData, PluginConfigurationData} from '@valtimo/plugin';
 
 interface SpotlerPluginConfig extends PluginConfigurationData {
     clientId: string;
@@ -25,7 +25,7 @@ interface SpotlerPluginConfig extends PluginConfigurationData {
     clientSecret: string;
 }
 
-interface SendMailActionConfig {
+interface SendMailActionConfig extends FunctionConfigurationData {
     subject: string;
     senderEmail: string;
     senderName: string;

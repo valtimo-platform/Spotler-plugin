@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FunctionConfigurationComponent} from '@valtimo/plugin';
+import {FunctionConfigurationComponent, FunctionConfigurationData} from '@valtimo/plugin';
 import {BehaviorSubject, combineLatest, Observable, Subscription, take, tap} from 'rxjs';
 import {Recipient, SendMailActionConfig} from '../../models';
 import {
@@ -28,8 +28,8 @@ export class SendMailActionConfigurationComponent
     @Input() pluginId: string;
     @Input() prefillConfiguration$: Observable<SendMailActionConfig>;
     @Output() valid: EventEmitter<boolean> = new EventEmitter<boolean>();
-    @Output() configuration: EventEmitter<SendMailActionConfig> =
-        new EventEmitter<SendMailActionConfig>();
+    @Output() configuration: EventEmitter<FunctionConfigurationData> =
+        new EventEmitter<FunctionConfigurationData>();
 
     private saveSubscription!: Subscription;
 
@@ -62,9 +62,9 @@ export class SendMailActionConfigurationComponent
         this.saveSubscription?.unsubscribe();
     }
 
-    formValueChange(formValue: SendMailActionConfig): void {
-        this.formValue$.next(formValue);
-        this.handleValid(formValue);
+    formValueChange(formValue: FunctionConfigurationData): void {
+        this.formValue$.next(formValue as SendMailActionConfig);
+        this.handleValid(formValue as SendMailActionConfig);
     }
 
     private handleValid(formValue: SendMailActionConfig): void {
@@ -91,7 +91,7 @@ export class SendMailActionConfigurationComponent
                 .pipe(take(1))
                 .subscribe(([formValue, valid]) => {
                     if (valid) {
-                        this.configuration.emit(formValue);
+                        this.configuration.emit(formValue as FunctionConfigurationData);
                     }
                 });
         });

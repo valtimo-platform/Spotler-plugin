@@ -18,7 +18,7 @@
  */
 
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {PluginConfigurationComponent} from '@valtimo/plugin';
+import {FunctionConfigurationData, PluginConfigurationComponent} from '@valtimo/plugin';
 import {BehaviorSubject, combineLatest, Observable, Subscription, take} from 'rxjs';
 import {SpotlerPluginConfig} from "../../models";
 
@@ -40,7 +40,7 @@ export class SpotlerPluginConfigurationComponent
 
   private saveSubscription!: Subscription;
 
-  private readonly formValue$ = new BehaviorSubject<SpotlerPluginConfig | null>(null);
+  private readonly formValue$ = new BehaviorSubject<SpotlerPluginConfig | undefined>(undefined);
   private readonly valid$ = new BehaviorSubject<boolean>(false);
 
   ngOnInit(): void {
@@ -51,9 +51,9 @@ export class SpotlerPluginConfigurationComponent
     this.saveSubscription?.unsubscribe();
   }
 
-  formValueChange(formValue: SpotlerPluginConfig): void {
-    this.formValue$.next(formValue);
-    this.handleValid(formValue);
+  formValueChange(formValue: FunctionConfigurationData): void {
+    this.formValue$.next(formValue as SpotlerPluginConfig);
+    this.handleValid(formValue as SpotlerPluginConfig);
   }
 
   private handleValid(formValue: SpotlerPluginConfig): void {
