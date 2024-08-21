@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 buildscript {
     repositories {
         mavenCentral()
@@ -98,6 +97,18 @@ dockerCompose {
     projectName = "spotler"
     isRequiredBy(integrationTesting)
     useComposeFiles.addAll("docker-compose-integration-test.yml")
+}
+
+jar {
+    enabled = true
+    manifest {
+        attributes(
+                "Implementation-Title": "spotler-plugin",
+                "Implementation-Version": "0.1"
+        )
+        archiveBaseName.set("spotler-plugin")
+    }
+
 }
 
 test {
