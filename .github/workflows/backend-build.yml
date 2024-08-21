@@ -35,6 +35,6 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
-      working-directory: plugin
+      working-directory: backend
 
 
