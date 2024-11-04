@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.ritense.spotler.domain
+package com.ritense.valtimoplugins.spotler.domain
 
-enum class RecipientType {
-    TO, CC, BCC
-}
+data class SpotlerRecipient(
+    val email: String,
+    val name: String,
+    val type: RecipientType
+)

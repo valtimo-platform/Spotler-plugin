@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.ritense.spotler.plugin
+package com.ritense.valtimoplugins.spotler.plugin
 
 import com.ritense.plugin.annotation.Plugin
 import com.ritense.plugin.annotation.PluginAction
 import com.ritense.plugin.annotation.PluginActionProperty
 import com.ritense.plugin.annotation.PluginProperty
 import com.ritense.processlink.domain.ActivityTypeWithEventName.SERVICE_TASK_START
-import com.ritense.spotler.domain.Placeholder
-import com.ritense.spotler.domain.RecipientType
-import com.ritense.spotler.domain.SpotlerProperties
-import com.ritense.spotler.domain.SpotlerRecipient
-import com.ritense.spotler.service.SpotlerMailDispatcher
-import com.ritense.spotler.service.SpotlerTokenService
+import com.ritense.valtimoplugins.spotler.domain.Placeholder
+import com.ritense.valtimoplugins.spotler.domain.RecipientType
+import com.ritense.valtimoplugins.spotler.domain.SpotlerProperties
+import com.ritense.valtimoplugins.spotler.domain.SpotlerRecipient
+import com.ritense.valtimoplugins.spotler.service.SpotlerMailDispatcher
+import com.ritense.valtimoplugins.spotler.service.SpotlerTokenService
 import com.ritense.valtimo.contract.basictype.EmailAddress
 import com.ritense.valtimo.contract.basictype.SimpleName
 import com.ritense.valtimo.contract.json.MapperSingleton

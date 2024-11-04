@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.ritense.spotler.domain
+package com.ritense.valtimoplugins.spotler.config
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import org.springframework.boot.context.properties.ConfigurationProperties
 
-data class OauthTokenResponse(
-    @JsonProperty("access_token") val accessToken: String,
-    @JsonProperty("expires_in") val expiresIn: Int,
-    @JsonProperty("scope") val scope: String,
-    @JsonProperty("token_type") val tokenType: String
+@ConfigurationProperties(prefix = "spotler")
+data class SpotlerConfigurationProperties(
+    val connectTimeout: Long?,
+    val durationTimeout: Long?
 )

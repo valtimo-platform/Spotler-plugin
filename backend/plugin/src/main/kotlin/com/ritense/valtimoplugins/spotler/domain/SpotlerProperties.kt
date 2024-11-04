@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.ritense.spotler.config
+package com.ritense.valtimoplugins.spotler.domain
 
-import org.springframework.boot.context.properties.ConfigurationProperties
-
-@ConfigurationProperties(prefix = "spotler")
-data class SpotlerConfigurationProperties(
-    val connectTimeout: Long?,
-    val durationTimeout: Long?
+data class SpotlerProperties(
+    val clientId: String,
+    val clientSecret: String,
+    val accountId: String
 )

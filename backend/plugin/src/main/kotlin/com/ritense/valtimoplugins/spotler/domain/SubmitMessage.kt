@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ritense.spotler.domain
+package com.ritense.valtimoplugins.spotler.domain
 
 import com.ritense.valtimo.contract.mail.model.TemplatedMailMessage
 import org.apache.tika.Tika

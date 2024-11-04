@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.ritense.spotler.domain
+package com.ritense.valtimoplugins.spotler.domain
 
-data class SpotlerProperties(
-    val clientId: String,
-    val clientSecret: String,
-    val accountId: String
+data class Placeholder(
+    val key: String,
+    val value: String
 )

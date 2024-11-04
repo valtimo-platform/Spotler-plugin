@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.ritense.spotler.autoconfiguration
+package com.ritense.valtimoplugins.spotler.autoconfiguration
 
 import com.ritense.plugin.service.PluginService
-import com.ritense.spotler.config.SpotlerConfigurationProperties
-import com.ritense.spotler.plugin.SpotlerPluginFactory
+import com.ritense.valtimoplugins.spotler.config.SpotlerConfigurationProperties
+import com.ritense.valtimoplugins.spotler.plugin.SpotlerPluginFactory
 import java.time.Duration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties

@@ -14,10 +14,17 @@
  * limitations under the License.
  */
 
-package com.ritense.spotler.domain
+package com.ritense.valtimoplugins.spotler.plugin
 
-data class SpotlerRecipient(
-    val email: String,
-    val name: String,
-    val type: RecipientType
-)
+import com.ritense.plugin.PluginFactory
+import com.ritense.plugin.service.PluginService
+import org.springframework.web.client.RestTemplate
+
+class SpotlerPluginFactory(
+    pluginService: PluginService,
+    val restTemplate: RestTemplate
+) : PluginFactory<SpotlerPlugin>(pluginService) {
+
+    override fun create() = SpotlerPlugin(restTemplate)
+
+}

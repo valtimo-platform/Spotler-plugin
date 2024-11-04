@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.ritense.spotler.service
+package com.ritense.valtimoplugins.spotler.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ritense.mail.MailDispatcher
-import com.ritense.spotler.domain.SpotlerProperties
-import com.ritense.spotler.domain.SubmitMessage
+import com.ritense.valtimoplugins.spotler.domain.SpotlerProperties
+import com.ritense.valtimoplugins.spotler.domain.SubmitMessage
 import com.ritense.valtimo.contract.basictype.EmailAddress
 import com.ritense.valtimo.contract.mail.model.MailMessageStatus
 import com.ritense.valtimo.contract.mail.model.RawMailMessage

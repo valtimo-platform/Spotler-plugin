@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.ritense.spotler.service
+package com.ritense.valtimoplugins.spotler.service
 
-import com.ritense.spotler.domain.OauthTokenResponse
-import com.ritense.spotler.domain.SpotlerProperties
+import com.ritense.valtimoplugins.spotler.domain.OauthTokenResponse
+import com.ritense.valtimoplugins.spotler.domain.SpotlerProperties
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.core.ResolvableType
 import org.springframework.http.HttpEntity
