@@ -24,7 +24,7 @@ pluginManager.withPlugin("maven-publish") {
 
                 pom {
                     name = "Spotler plugin module"
-                    description = "The spotler plugin for valtimo allows for sending emails from a bpmn process"
+                    description = "The Spotler plugin for valtimo allows for sending emails from a BPMN process"
                     developers {
                         developer {
                             id = "team-valtimo"
