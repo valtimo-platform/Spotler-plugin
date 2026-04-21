@@ -1,5 +1,5 @@
 /*
- * Copyright 2026 Ritense BV, the Netherlands.
+ * Copyright 2015-2023 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 dockerCompose {
-    setProjectName("sample-plugin")
+    setProjectName("spotler")
     isRequiredBy(project.tasks.integrationTesting)
 
     tasks.integrationTesting {
@@ -24,39 +24,47 @@ dockerCompose {
 }
 
 val kotlinLoggingVersion: String by project
+val okhttpVersion: String by project
+val apacheTikaVersion: String by project
 val mockitoKotlinVersion: String by project
-val valtimoVersion: String by project
-val operatonVersion: String by project
 
 dependencies {
-    compileOnly("com.ritense.valtimo:plugin-valtimo")
-    compileOnly("com.ritense.valtimo:process-document")
-    compileOnly("com.ritense.valtimo:contract")
-    compileOnly("org.operaton.bpm:operaton-engine:$operatonVersion")
-    compileOnly("org.springframework.boot:spring-boot-autoconfigure")
-    compileOnly("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.ritense.valtimo:contract")
+    implementation("com.ritense.valtimo:core")
+    implementation("com.ritense.valtimo:plugin-valtimo")
+    implementation("com.ritense.valtimo:value-resolver")
+    implementation("com.ritense.valtimo:mail")
 
-    compileOnly("io.github.oshai:kotlin-logging:$kotlinLoggingVersion")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+
+    implementation("io.github.oshai:kotlin-logging:$kotlinLoggingVersion")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.fasterxml.jackson.core:jackson-annotations")
+    implementation("com.fasterxml.jackson.core:jackson-core")
+
+    // Apache deps
+    implementation("org.apache.httpcomponents.client5:httpclient5")
+    implementation("org.apache.httpcomponents:httpcore")
+    implementation("org.apache.tika:tika-core:$apacheTikaVersion")
 
     // Testing
-    testImplementation("com.ritense.valtimo:plugin-valtimo")
-    testImplementation("com.ritense.valtimo:process-document")
-    testImplementation("com.ritense.valtimo:building-block")
-    testImplementation("com.ritense.valtimo:local-resource")
-    testImplementation("com.ritense.valtimo:test-utils-common")
-
-    testImplementation("org.springframework.boot:spring-boot-starter-web")
-    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    testImplementation("org.springframework.boot:spring-boot-starter-security")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-
+    testImplementation("com.fasterxml.jackson.core:jackson-databind")
+    testImplementation("com.fasterxml.jackson.core:jackson-annotations")
+    testImplementation("com.fasterxml.jackson.core:jackson-core")
+    testImplementation("org.junit.jupiter:junit-jupiter-migrationsupport")
+    testImplementation("org.assertj:assertj-core")
     testImplementation("org.mockito:mockito-core")
+    testImplementation("org.hamcrest:hamcrest-library")
+    testImplementation("com.jayway.jsonpath:json-path")
     testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
 
-    testImplementation("org.postgresql:postgresql")
+
+    testImplementation("com.squareup.okhttp3:mockwebserver:$okhttpVersion")
+    testImplementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+
 }
 
 apply(from = "gradle/publishing.gradle")

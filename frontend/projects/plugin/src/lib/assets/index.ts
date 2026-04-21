@@ -17,12 +17,4 @@
  *
  */
 
-/*
- * Public API Surface of slack
- */
-
-export * from './lib/models';
-export * from './lib/spotler-plugin-module';
-export * from './lib/spotler-plugin.specification';
-export * from './lib/components/plugin-configuration/spotler-plugin-configuration.component';
-export * from './lib/components/send-mail-configuration/send-mail-action-configuration.component';
+export * from './spotler-plugin-logo';
