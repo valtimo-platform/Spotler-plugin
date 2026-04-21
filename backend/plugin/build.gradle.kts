@@ -29,18 +29,18 @@ val apacheTikaVersion: String by project
 val mockitoKotlinVersion: String by project
 
 dependencies {
-    implementation("com.ritense.valtimo:contract")
-    implementation("com.ritense.valtimo:core")
-    implementation("com.ritense.valtimo:plugin-valtimo")
-    implementation("com.ritense.valtimo:value-resolver")
-    implementation("com.ritense.valtimo:mail")
+    compileOnly("com.ritense.valtimo:contract")
+    compileOnly("com.ritense.valtimo:core")
+    compileOnly("com.ritense.valtimo:plugin-valtimo")
+    compileOnly("com.ritense.valtimo:value-resolver")
+    compileOnly("com.ritense.valtimo:mail")
 
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    compileOnly("org.springframework.boot:spring-boot-starter-webflux")
 
-    implementation("io.github.oshai:kotlin-logging:$kotlinLoggingVersion")
-    implementation("com.fasterxml.jackson.core:jackson-databind")
-    implementation("com.fasterxml.jackson.core:jackson-annotations")
-    implementation("com.fasterxml.jackson.core:jackson-core")
+    compileOnly("io.github.oshai:kotlin-logging:$kotlinLoggingVersion")
+    compileOnly("com.fasterxml.jackson.core:jackson-databind")
+    compileOnly("com.fasterxml.jackson.core:jackson-annotations")
+    compileOnly("com.fasterxml.jackson.core:jackson-core")
 
     // Apache deps
     implementation("org.apache.httpcomponents.client5:httpclient5")
