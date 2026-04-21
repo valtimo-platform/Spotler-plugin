@@ -6,7 +6,7 @@
         "formDefinitionName": "start-form-example"
     },
     {
-        "activityId": "time-api-sample-action",
+        "activityId": "spotler-action",
         "activityType": "bpmn:ServiceTask:start",
         "processLinkType": "plugin",
         "pluginDefinitionKey": "spotler",
