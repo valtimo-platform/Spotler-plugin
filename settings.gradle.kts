@@ -1,4 +1,4 @@
-rootProject.name = "valtimo-plugin-template"
+rootProject.name = "spotler-plugin"
 include(
     "backend",
     "backend:app",
