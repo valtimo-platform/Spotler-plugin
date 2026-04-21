@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Ritense BV, the Netherlands.
+ * Copyright 2026 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@ import {
   KeycloakModule,
   KeycloakUserService,
   ValtimoKeycloakOptions,
-} from '@valtimo/keycloak';
-import {KeycloakConfig, KeycloakOnLoad} from 'keycloak-js';
-import {Auth, AuthProviders} from '@valtimo/config';
+} from "@valtimo/keycloak";
+import {KeycloakConfig, KeycloakOnLoad} from "keycloak-js";
+import {Auth, AuthProviders} from "@valtimo/shared";
 
 const keycloakAuthenticationProviders: AuthProviders = {
   guardServiceProvider: KeycloakAuthGuardService,
@@ -30,19 +30,19 @@ const keycloakAuthenticationProviders: AuthProviders = {
 };
 
 const keycloakConfigDev: KeycloakConfig = {
-  url: 'http://localhost:8082/auth/',
-  realm: 'valtimo',
-  clientId: 'valtimo-console',
+  url: "http://localhost:8081/auth/",
+  realm: "valtimo",
+  clientId: "valtimo-console",
 };
 
-const keycloakOnLoad: KeycloakOnLoad = 'login-required';
+const keycloakOnLoad: KeycloakOnLoad = "login-required";
 
 const keycloakInitOptions: any = {
   config: keycloakConfigDev,
   onLoad: keycloakOnLoad,
   checkLoginIframe: false,
-  flow: 'standard',
-  redirectUri: 'http://localhost:4200/keycloak/callback',
+  flow: "standard",
+  redirectUri: "http://localhost:4200/keycloak/callback",
 };
 
 const valtimoKeycloakOptions: ValtimoKeycloakOptions = {
@@ -50,9 +50,9 @@ const valtimoKeycloakOptions: ValtimoKeycloakOptions = {
     config: keycloakConfigDev,
     initOptions: keycloakInitOptions,
     enableBearerInterceptor: true,
-    bearerExcludedUrls: ['/assets', '.*?.amazonaws.com/'],
+    bearerExcludedUrls: ["/assets", ".*?.amazonaws.com/"],
   },
-  logoutRedirectUri: 'http://localhost:4200',
+  logoutRedirectUri: "http://localhost:4200",
 };
 
 export const authenticationKeycloak: Auth = {

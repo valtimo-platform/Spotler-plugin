@@ -1,172 +1,161 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {Injector, NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {HttpBackend, HttpClientModule} from '@angular/common/http';
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {LayoutModule} from '@valtimo/layout';
+/*
+ * Copyright 2026 Ritense BV, the Netherlands.
+ *
+ * Licensed under EUPL, Version 1.2 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import {AccessControlManagementModule} from "@valtimo/access-control-management";
+import {AccountModule} from "@valtimo/account";
+import {AnalyseModule} from "@valtimo/analyse";
+import {AppComponent} from "./app.component";
+import {AppRoutingModule} from "./app-routing.module";
+import {
+  PLUGINS_TOKEN,
+} from "@valtimo/plugin";
+import {BootstrapModule} from "@valtimo/bootstrap";
 import {
   BpmnJsDiagramModule,
-  CarbonListModule,
-  CardModule,
-  DataListModule,
-  ListModule,
+  enableCustomFormioComponents,
   MenuModule,
-  registerDocumentenApiFormioUploadComponent,
   registerFormioFileSelectorComponent,
   registerFormioUploadComponent,
-  SpinnerModule,
-  TableModule,
+  registerFormioValueResolverSelectorComponent,
+  ValuePathSelectorComponent,
   WidgetModule,
-} from '@valtimo/components';
-import {TaskModule} from '@valtimo/task';
-import {environment} from '../environments/environment';
-import {AuthGuardService, SecurityModule} from '@valtimo/security';
-import {ChoicefieldModule} from '@valtimo/choicefield';
+} from "@valtimo/components";
+import {BrowserModule} from "@angular/platform-browser";
+import {BuildingBlockManagementModule} from "@valtimo/building-block-management";
+import {CaseManagementModule} from "@valtimo/case-management";
+import {CaseMigrationModule} from "@valtimo/case-migration";
+import {ChoiceFieldModule} from "@valtimo/choice-field";
+import {CommonModule} from "@angular/common";
+import {ConfigModule, ConfigService, CustomMultiTranslateHttpLoaderFactory, LocalizationService} from "@valtimo/shared";
+import {DashboardManagementModule} from "@valtimo/dashboard-management";
+import {DashboardModule} from "@valtimo/dashboard";
+import {DecisionModule} from "@valtimo/decision";
 import {
+  CaseDetailTabAuditComponent,
+  CaseDetailTabDocumentsComponent,
+  CaseDetailTabProgressComponent,
+  CaseDetailTabSummaryComponent,
+  CaseModule,
   DefaultTabs,
-  DossierDetailTabAuditComponent,
-  DossierDetailTabDocumentsComponent,
-  DossierDetailTabProgressComponent,
-  DossierDetailTabSummaryComponent,
-  DossierModule,
-} from '@valtimo/dossier';
-import {ProcessModule} from '@valtimo/process';
-import {ViewConfiguratorModule} from '@valtimo/view-configurator';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DashboardModule} from '@valtimo/dashboard';
-import {DocumentModule} from '@valtimo/document';
-import {AccountModule} from '@valtimo/account';
-import {ChoiceFieldModule} from '@valtimo/choice-field';
-import {FormModule} from '@valtimo/form';
-import {SwaggerModule} from '@valtimo/swagger';
-import {AnalyseModule} from '@valtimo/analyse';
-import {ProcessManagementModule} from '@valtimo/process-management';
-import {DecisionModule} from '@valtimo/decision';
-import {MilestoneModule} from '@valtimo/milestone';
-import {LoggerModule} from 'ngx-logger';
-import {FormManagementModule} from '@valtimo/form-management';
-import {FormLinkModule} from '@valtimo/form-link';
-import {MigrationModule} from '@valtimo/migration';
-import {DossierManagementModule} from '@valtimo/dossier-management';
-import {BootstrapModule} from '@valtimo/bootstrap';
-import {ConfigModule, ConfigService, MultiTranslateHttpLoaderFactory} from '@valtimo/config';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {PluginManagementModule} from '@valtimo/plugin-management';
-import {ConnectorManagementModule} from '@valtimo/connector-management';
-import {
-  ObjectenApiPluginModule,
-  objectenApiPluginSpecification, ObjectTokenAuthenticationPluginModule,
-  objectTokenAuthenticationPluginSpecification, ObjecttypenApiPluginModule, objecttypenApiPluginSpecification,
-  PLUGINS_TOKEN, SmartDocumentsPluginModule, smartDocumentsPluginSpecification,
-} from '@valtimo/plugin';
-import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
-import {GridModule, IconModule, TilesModule} from "carbon-components-angular";
-import {
-  SpotlerPluginModule
-} from "../../projects/valtimo/spotler/src/lib/spotler-plugin-module";
-import {
-  spotlerPluginSpecification
-} from "../../projects/valtimo/spotler/src/lib/spotler-plugin.specification";
-import {ObjectManagementModule} from "@valtimo/object-management";
-import {ObjectModule} from "@valtimo/object";
+} from "@valtimo/case";
+import {DocumentModule} from "@valtimo/document";
+import {FormManagementModule} from "@valtimo/form-management";
+import {FormModule} from "@valtimo/form";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpBackend, HttpClient, HttpClientModule} from "@angular/common/http";
+import {Injector, NgModule} from "@angular/core";
+import {LayoutModule, TranslationManagementModule} from "@valtimo/layout";
+import {LoggerModule} from "ngx-logger";
+import {LoggingModule} from "@valtimo/logging";
+import {MigrationModule} from "@valtimo/migration";
+import {MilestoneModule} from "@valtimo/milestone";
+import {PluginManagementModule} from "@valtimo/plugin-management";
+import {ProcessLinkModule} from "@valtimo/process-link";
+import {ProcessManagementModule} from "@valtimo/process-management";
+import {ProcessModule} from "@valtimo/process";
+import {ResourceModule} from "@valtimo/resource";
+import {SecurityModule} from "@valtimo/security";
+import {SseModule} from "@valtimo/sse";
+import {SwaggerModule} from "@valtimo/swagger";
+import {TaskModule} from "@valtimo/task";
+import {TeamsModule} from "@valtimo/teams";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {environment} from "../environments/environment";
+
+import {SamplePluginModule, samplePluginSpecification,} from "@valtimo-plugins/sample-plugin";
 
 export function tabsFactory() {
   return new Map<string, object>([
-    [DefaultTabs.summary, DossierDetailTabSummaryComponent],
-    [DefaultTabs.progress, DossierDetailTabProgressComponent],
-    [DefaultTabs.audit, DossierDetailTabAuditComponent],
-    [DefaultTabs.documents, DossierDetailTabDocumentsComponent],
+    [DefaultTabs.summary, CaseDetailTabSummaryComponent],
+    [DefaultTabs.progress, CaseDetailTabProgressComponent],
+    [DefaultTabs.audit, CaseDetailTabAuditComponent],
+    [DefaultTabs.documents, CaseDetailTabDocumentsComponent],
   ]);
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
-    CommonModule,
-    BrowserModule,
-    AppRoutingModule,
-    LayoutModule,
-    CardModule,
-    WidgetModule,
-    BootstrapModule,
-    ConfigModule.forRoot(environment),
-    LoggerModule.forRoot(environment.logger),
     environment.authentication.module,
-    SecurityModule,
-    MenuModule,
-    TaskModule,
-    ChoicefieldModule,
-    DossierModule.forRoot(tabsFactory),
-    ProcessModule,
-    ViewConfiguratorModule,
-    BpmnJsDiagramModule,
-    FormsModule,
-    ReactiveFormsModule,
-    DashboardModule,
-    DocumentModule,
+    AccessControlManagementModule,
     AccountModule,
-    ChoiceFieldModule,
-    FormModule,
-    CarbonListModule,
     AnalyseModule,
-    SwaggerModule,
-    ProcessManagementModule,
+    AppRoutingModule,
+    BootstrapModule,
+    BpmnJsDiagramModule,
+    BrowserModule,
+    BuildingBlockManagementModule,
+    CaseManagementModule,
+    CaseMigrationModule,
+    CaseModule.forRoot(tabsFactory),
+    ChoiceFieldModule,
+    CommonModule,
+    ConfigModule.forRoot(environment),
+    DashboardManagementModule,
+    DashboardModule,
     DecisionModule,
-    MilestoneModule,
+    DocumentModule,
     FormManagementModule,
-    FormLinkModule,
-    MigrationModule,
-    DossierManagementModule,
-    ConnectorManagementModule,
-    PluginManagementModule,
-    ListModule,
-    TranslateModule,
-    SpinnerModule,
-    DataListModule,
-    TableModule,
+    FormModule,
+    FormsModule,
     HttpClientModule,
+    LayoutModule,
+    LoggerModule.forRoot(environment.logger),
+    LoggingModule,
+    MenuModule,
+    MigrationModule,
+    MilestoneModule,
+    PluginManagementModule,
+    ProcessLinkModule,
+    ProcessManagementModule,
+    ProcessModule,
+    ReactiveFormsModule,
+    ResourceModule,
+    SamplePluginModule,
+    SecurityModule,
+    SseModule,
+    SwaggerModule,
+    TaskModule,
+    TeamsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: MultiTranslateHttpLoaderFactory,
-        deps: [HttpBackend, ConfigService],
+        useFactory: CustomMultiTranslateHttpLoaderFactory,
+        deps: [HttpBackend, HttpClient, ConfigService, LocalizationService],
       },
     }),
-    KeycloakAngularModule,
-    TilesModule,
-    GridModule,
-    IconModule,
-    ObjectenApiPluginModule,
-    ObjecttypenApiPluginModule,
-    ObjectTokenAuthenticationPluginModule,
-    ObjectModule,
-    ObjectManagementModule,
-    SpotlerPluginModule,
+    TranslationManagementModule,
+    ValuePathSelectorComponent,
+    WidgetModule,
   ],
   providers: [
     {
       provide: PLUGINS_TOKEN,
       useValue: [
-        spotlerPluginSpecification,
-        objectenApiPluginSpecification,
-        objecttypenApiPluginSpecification,
-        objectTokenAuthenticationPluginSpecification
+        samplePluginSpecification,
       ],
-    },
-    AuthGuardService,
-    {
-      provide: KeycloakService,
     },
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(injector: Injector) {
+    enableCustomFormioComponents(injector);
     registerFormioUploadComponent(injector);
     registerFormioFileSelectorComponent(injector);
-    registerDocumentenApiFormioUploadComponent(injector);
+    registerFormioValueResolverSelectorComponent(injector);
   }
 }

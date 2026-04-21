@@ -9,9 +9,10 @@ bower_components
 ######################
 # Node
 ######################
-/node/**
-/node_tmp/**
-/node_modules/**
+frontend/node/**
+frontend/node_tmp/**
+frontend/node_modules/**
+frontend/node_modules/bl/node_modules/readable-stream
 
 ######################
 # SASS
@@ -155,6 +156,16 @@ Desktop.ini
 
 
 **/.gradle
-**/build/
-**/node_modules/
-**/dist/
+**/build/**
+**/sonatypeCentralStaging/**
+**/node_modules/**
+**/dist/**
+**/*.d.ts
+/.env.properties
+dist
+out-tsc
+backend/.idea/
+frontend/package-lock.json
+.kotlin
+.idea
+migration
