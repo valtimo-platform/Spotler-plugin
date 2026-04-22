@@ -17,5 +17,7 @@
 package com.ritense.valtimoplugins.spotler.domain
 
 enum class RecipientType {
-    TO, CC, BCC
+    TO,
+    CC,
+    BCC,
 }

@@ -31,9 +31,8 @@ import org.springframework.web.client.RestTemplate
 
 class SpotlerTokenService(
     private val spotlerProperties: SpotlerProperties,
-    private val restTemplate: RestTemplate
+    private val restTemplate: RestTemplate,
 ) {
-
     fun getToken(): String {
         try {
             val httpHeaders = HttpHeaders()
@@ -45,12 +44,13 @@ class SpotlerTokenService(
             params.add("grant_type", "client_credentials")
 
             val httpEntity = HttpEntity(params, httpHeaders)
-            val response = restTemplate.exchange(
-                TOKEN_URL,
-                HttpMethod.POST,
-                httpEntity,
-                getType(OauthTokenResponse::class.java)
-            )
+            val response =
+                restTemplate.exchange(
+                    TOKEN_URL,
+                    HttpMethod.POST,
+                    httpEntity,
+                    getType(OauthTokenResponse::class.java),
+                )
             return response.body.accessToken
         } catch (e: HttpStatusCodeException) {
             throw HttpClientErrorException(e.statusCode, "No token received")
@@ -58,9 +58,10 @@ class SpotlerTokenService(
     }
 
     fun <T> getType(responseClass: Class<out T>): ParameterizedTypeReference<T> {
-        val type: ParameterizedTypeReference<T> = ParameterizedTypeReference.forType(
-            ResolvableType.forClass(responseClass).type
-        )
+        val type: ParameterizedTypeReference<T> =
+            ParameterizedTypeReference.forType(
+                ResolvableType.forClass(responseClass).type,
+            )
         return type
     }
 

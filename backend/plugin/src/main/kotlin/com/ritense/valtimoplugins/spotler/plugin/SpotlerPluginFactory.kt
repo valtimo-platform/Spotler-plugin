@@ -22,9 +22,7 @@ import org.springframework.web.client.RestTemplate
 
 class SpotlerPluginFactory(
     pluginService: PluginService,
-    val restTemplate: RestTemplate
+    val restTemplate: RestTemplate,
 ) : PluginFactory<SpotlerPlugin>(pluginService) {
-
     override fun create() = SpotlerPlugin(restTemplate)
-
 }

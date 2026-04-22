@@ -19,5 +19,5 @@ package com.ritense.valtimoplugins.spotler.domain
 data class SpotlerRecipient(
     val email: String,
     val name: String,
-    val type: RecipientType
+    val type: RecipientType,
 )

@@ -21,5 +21,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 @ConfigurationProperties(prefix = "spotler")
 data class SpotlerConfigurationProperties(
     val connectTimeout: Long?,
-    val durationTimeout: Long?
+    val durationTimeout: Long?,
 )

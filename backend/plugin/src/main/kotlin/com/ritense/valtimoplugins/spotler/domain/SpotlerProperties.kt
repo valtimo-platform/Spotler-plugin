@@ -19,5 +19,5 @@ package com.ritense.valtimoplugins.spotler.domain
 data class SpotlerProperties(
     val clientId: String,
     val clientSecret: String,
-    val accountId: String
+    val accountId: String,
 )

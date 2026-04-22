@@ -22,7 +22,7 @@ import org.apache.tika.Tika
 data class SubmitMessage(
     val attachments: MutableList<Attachment> = mutableListOf(),
     val data: MutableMap<String, Any>,
-    val flowSelector: String, //link to flow with template
+    val flowSelector: String, // link to flow with template
     val headerFromAddress: String,
     val headerFromName: String,
     val headerToAddress: String,
@@ -33,42 +33,55 @@ data class SubmitMessage(
     val senderAddress: String,
     val subject: String,
 ) {
-
     data class Attachment(
         val content: ByteArray,
-        val contentType: String, //MimeType
-        val disposition: Disposition = Disposition.attachment,
-        val filename: String
+        val contentType: String, // MimeType
+        val disposition: Disposition = Disposition.ATTACHMENT,
+        val filename: String,
     )
 
     enum class Disposition {
-        attachment, inline, related
+        ATTACHMENT,
+        INLINE,
+        RELATED,
     }
 
     enum class MessageType {
-        EMAIL, SMS, LETTER
+        EMAIL,
+        SMS,
+        LETTER,
     }
 
     data class Header(
         val name: String,
-        val value: String
+        val value: String,
     )
 
     companion object {
         fun from(templatedMailMessage: TemplatedMailMessage): List<SubmitMessage> {
             val messageList = mutableListOf<SubmitMessage>()
             templatedMailMessage.recipients.get().forEach {
-                val submitMessage = SubmitMessage(
-                    flowSelector = templatedMailMessage.templateIdentifier.get(),
-                    headerFromAddress = templatedMailMessage.sender.email.get().orEmpty(),
-                    headerFromName = templatedMailMessage.sender.name.get().orEmpty(),
-                    headerToAddress = it.email.get(),
-                    headerToName = it.name.get().orEmpty(),
-                    recipientAddress = it.email.get(),
-                    senderAddress = templatedMailMessage.sender.email.get().orEmpty(),
-                    subject = templatedMailMessage.subject.get().orEmpty(),
-                    data = templatedMailMessage.placeholders
-                )
+                val submitMessage =
+                    SubmitMessage(
+                        flowSelector = templatedMailMessage.templateIdentifier.get(),
+                        headerFromAddress =
+                            templatedMailMessage.sender.email
+                                .get()
+                                .orEmpty(),
+                        headerFromName =
+                            templatedMailMessage.sender.name
+                                .get()
+                                .orEmpty(),
+                        headerToAddress = it.email.get(),
+                        headerToName = it.name.get().orEmpty(),
+                        recipientAddress = it.email.get(),
+                        senderAddress =
+                            templatedMailMessage.sender.email
+                                .get()
+                                .orEmpty(),
+                        subject = templatedMailMessage.subject.get().orEmpty(),
+                        data = templatedMailMessage.placeholders,
+                    )
 
                 if (templatedMailMessage.attachments.isPresent) {
                     templatedMailMessage.attachments.get().forEach { attachment ->
@@ -76,8 +89,8 @@ data class SubmitMessage(
                             Attachment(
                                 content = attachment.content.get(),
                                 contentType = Tika().detect(attachment.content.get()),
-                                filename = attachment.name.get()
-                            )
+                                filename = attachment.name.get(),
+                            ),
                         )
                     }
                 }

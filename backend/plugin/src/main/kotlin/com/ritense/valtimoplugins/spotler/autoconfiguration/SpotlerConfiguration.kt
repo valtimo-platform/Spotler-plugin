@@ -19,36 +19,32 @@ package com.ritense.valtimoplugins.spotler.autoconfiguration
 import com.ritense.plugin.service.PluginService
 import com.ritense.valtimoplugins.spotler.config.SpotlerConfigurationProperties
 import com.ritense.valtimoplugins.spotler.plugin.SpotlerPluginFactory
-import java.time.Duration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.client.RestTemplate
+import java.time.Duration
 
 @Configuration
 @EnableConfigurationProperties(SpotlerConfigurationProperties::class)
 class SpotlerConfiguration {
-
     @Bean
     @ConditionalOnMissingBean(SpotlerPluginFactory::class)
     fun spotlerPluginFactory(
         pluginService: PluginService,
-        restTemplate: RestTemplate
+        restTemplate: RestTemplate,
     ) = SpotlerPluginFactory(
         pluginService,
-        restTemplate
+        restTemplate,
     )
 
     @Bean
     @ConditionalOnMissingBean(RestTemplate::class)
-    fun restTemplate(
-        spotlerConfigurationProperties: SpotlerConfigurationProperties
-    ): RestTemplate {
-        return RestTemplateBuilder()
+    fun restTemplate(spotlerConfigurationProperties: SpotlerConfigurationProperties): RestTemplate =
+        RestTemplateBuilder()
             .setConnectTimeout(Duration.ofSeconds(spotlerConfigurationProperties.connectTimeout ?: 60))
             .setReadTimeout(Duration.ofSeconds(spotlerConfigurationProperties.connectTimeout ?: 60))
             .build()
-    }
 }
