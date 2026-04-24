@@ -1,6 +1,0 @@
-services:
-  db:
-    ports:
-      - "54351:5432"
-    environment:
-      - POSTGRES_DB=slack-test
